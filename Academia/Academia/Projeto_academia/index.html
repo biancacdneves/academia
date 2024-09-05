@@ -1,0 +1,73 @@
+ <!-- Inicio do projeto "Academia" -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEATHLOK</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <!-- calculo do IMC e estrutura visto no exercicio 33 do conteudo do professo "Guanabara" -->
+<section class="caixa-principal">
+    <div class="container">
+        <form id="imcForm">
+            <img src="https://static.wikia.nocookie.net/marveldatabase/images/6/63/Deathlok_%282014%29_logo.png/revision/latest?cb=20140722215640" alt="DEATHLOK">
+            <br>
+            <h2 class="teste23" id="boasVindas"></h2> 
+            <br>
+            <h3 class="txt1">     Calcule aqui seu IMC:     </h3>
+            <div class="inputf">
+                <input type="number" id="peso" name="peso" placeholder="" required>
+                <label>Peso (kg):</label>
+            </div>
+
+            <div class="inputf">
+                <input type="number" id="altura" name="altura" placeholder="" required>
+                <label>Altura (m):</label>
+            </div>
+
+            <div class="botao">
+                <button type="button" onclick="calcularIMC()">Calcular</button>
+            </div>
+            <br>
+            <div id="resultado"></div>
+        </form>    
+    </div>
+</section>
+
+    <script>      
+        const nome = localStorage.getItem('nomeUsuario'); 
+        if (nome) {
+            document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
+        }
+        
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            const imc = peso / (altura * altura);
+            const resultado = document.getElementById('resultado');
+
+            let classificacao = '';
+
+            if (imc < 18.5) {
+                classificacao = 'Abaixo do peso';
+            } else if (imc >= 18.5 && imc < 25) {
+                classificacao = 'Peso normal';
+            } else if (imc >= 25 && imc < 30) {
+                classificacao = 'Sobrepeso';
+            } else if (imc >= 30 && imc < 35) {
+                classificacao = 'Obesidade grau 1';
+            } else if (imc >= 35 && imc < 40) {
+                classificacao = 'Obesidade grau 2';
+            } else {
+                classificacao = 'Obesidade grau 3';
+            }
+
+            resultado.innerHTML = `Seu IMC é ${imc.toFixed(2)} (${classificacao})`;
+        }
+    </script>
+</body>
+</html>
